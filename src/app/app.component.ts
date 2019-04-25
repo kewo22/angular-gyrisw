@@ -94,6 +94,7 @@ export class AppComponent implements OnInit {
         }
 
         this.trucks.push(x);
+        
       }
 
     });
