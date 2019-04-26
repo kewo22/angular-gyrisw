@@ -75,7 +75,10 @@ export class AppComponent implements OnInit {
       }
     ];
 
-    // const _this = this;
+    let optArray: string[] = ['D1', 'D2', 'N'];
+    let daysArray: number[] = [0, 1, 2, 3, 4, 5, 6];
+
+    // Group by primeMoverNumber
     this.mockDbData.forEach((v, i) => {
 
       let cpm = v.primeMoverNumber;
@@ -99,9 +102,7 @@ export class AppComponent implements OnInit {
 
     });
 
-    let optArray: string[] = ['D1', 'D2', 'N'];
-    let daysArray: number[] = [0, 1, 2, 3, 4, 5, 6];
-
+    // Add missing mapreferences
     this.trucks.forEach((v, i) => {
 
       let mapRefs = this.mockDbData.filter(obj => {
