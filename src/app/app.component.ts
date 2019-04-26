@@ -94,7 +94,7 @@ export class AppComponent implements OnInit {
         }
 
         this.trucks.push(x);
-        
+
       }
 
     });
@@ -107,7 +107,7 @@ export class AppComponent implements OnInit {
       let mapRefs = this.mockDbData.filter(obj => {
         return obj.primeMoverNumber === v.primeMoverNumber;
       })
-      console.log(mapRefs)
+      // console.log(mapRefs)
 
       for (let d = 0; d < daysArray.length; d++) {
         for (let o = 0; o < optArray.length; o++) {
@@ -115,59 +115,26 @@ export class AppComponent implements OnInit {
             return obj.dayOfWeek === d && obj.spanOfDay === optArray[o];
           })
 
-          console.log(findbyDayAndOpt)
-
           if (findbyDayAndOpt === undefined) {
-            console.log(d, optArray[o])
+            let x = {
+              locationId: v.locationId,
+              mapReference: '-',
+              primeMoverNumber: v.primeMoverNumber,
+              dayOfWeek: d,
+              spanOfDay: optArray[o],
+              countryId: 0,
+              colorCode: '',
+              tripType: 'NEW'
+            };
+            mapRefs.push(x);
+            // console.log(d, optArray[o])
+          } else {
+            // console.log(findbyDayAndOpt);
           }
         }
       }
 
-      // if there's no data for whole week
-      // if (mapRefs.length !== 21) {
-
-      //   let x: MasterScheduleLine;
-
-      //   daysArray.forEach(function (dayValue, dayIndex) {
-
-      //     const foundDayOfWeek = mapRefs.filter(obj => {
-      //       return obj.dayOfWeek === dayValue;
-      //     })
-
-      //     // if there's no data for all options
-      //     if (foundDayOfWeek.length !== 3) {
-
-      //       optArray.forEach((optValue, optIndex) => {
-      //         const foundSpanOfDay = foundDayOfWeek.find(obj => {
-      //           return obj.spanOfDay === optValue;
-      //         })
-
-      //         if (foundSpanOfDay === undefined) {
-      //           x = {
-      //             locationId: v.locationId,
-      //             mapReference: '-',
-      //             primeMoverNumber: v.primeMoverNumber,
-      //             dayOfWeek: dayIndex,
-      //             spanOfDay: optValue,
-      //             countryId: 0,
-      //             colorCode: '',
-      //             tripType: 'NEW'
-      //           };
-      //         }
-
-      //         v.mapReferences.push(x);
-
-      //       });
-
-      //     } else {
-      //       v.mapReferences = mapRefs;
-      //     }
-
-      //   });
-
-      // } else {
-      //   v.mapReferences = mapRefs;
-      // }
+      v.mapReferences = mapRefs;
 
     })
 
@@ -187,11 +154,12 @@ interface MasterScheduleLine {
   locationId: string;
   mapReference: string;
   primeMoverNumber: string; //TRUCK
-  dayOfWeek: number;
   spanOfDay: string;
+  dayOfWeek: number;
   countryId: number;
   colorCode: string;
   tripType: string;
+  deliveryDate: Date;
 }
 
 interface MasterScheduleTruckLines {
